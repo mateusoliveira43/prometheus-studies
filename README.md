@@ -4,15 +4,19 @@ Studies to understand how Prometheus works.
 
 ## About
 
-TODO
+[Prometheus](https://prometheus.io/docs/introduction/overview/) is an open-source monitoring solution. It collects and stores the target applications' metrics as time series data, which can be retrieved with PromQL (Prometheus Query Language). It also handles alerts through [Alertmanager](https://prometheus.io/docs/introduction/glossary/#alertmanager).
 
-### Alert manager
+### Visualization
 
-TODO
+To visualize the collected data, Prometheus Web UI can be used, or a more robust solution, like [Grafana](https://grafana.com/).
+
+### Exporter
+
+An exporter is a binary running alongside the target applications, which exposes their metrics, in a format Prometheus supports. For monitoring a wide variety of hardware and kernel-related metrics, [Prometheus Node Exporter](https://github.com/prometheus/node_exporter) can be used.
 
 ## Running
 
-We will follow [Prometheus documentation](https://prometheus.io/docs/introduction/overview/) examples using Docker. We will use [Prometheus](https://hub.docker.com/u/prom) images, but is also possible to use [Bitnami](https://hub.docker.com/u/bitnami) images.
+We will follow [Prometheus documentation](https://prometheus.io/docs/introduction/overview/) and [The Uncomplicating Prometheus Training](https://github.com/badtuxx/DescomplicandoPrometheus) examples using Docker. We will use [Prometheus](https://hub.docker.com/u/prom) images, but is also possible to use [Bitnami](https://hub.docker.com/u/bitnami) images.
 
 ### Requirements
 
@@ -93,6 +97,26 @@ To clean up the workspace, run
 docker-compose down --volumes --rmi 'all'
 ```
 
+### Creating an exporter
+
+We can write an exporter in several languages, like [Python](https://github.com/prometheus/client_python), [Go](https://github.com/prometheus/client_golang), etc. To check some already existing solutions, check [Prometheus client libraries](https://prometheus.io/docs/instrumenting/clientlibs/).
+
+To follow this section, change to the following directory
+```sh
+cd creating-exporter
+```
+
+To start Prometheus and the Go exporter, run
+```
+docker-compose up
+```
+Access [http://localhost:9090](http://localhost:9090) to see Prometheus and [http://localhost:8081](http://localhost:8081) to see Go exporter. Run `CTRL+C` to stop it.
+
+To clean up the workspace, run
+```
+docker-compose down --volumes --rmi 'all'
+```
+
 ### TODO Alerting
 
 https://prometheus.io/docs/tutorials/alerting_based_on_metrics/
@@ -106,3 +130,4 @@ https://prometheus.io/docs/prometheus/latest/configuration/unit_testing_rules/
 ## References :books:
 
 - https://prometheus.io/docs/introduction/overview/
+- https://github.com/badtuxx/DescomplicandoPrometheus
