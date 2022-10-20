@@ -4,7 +4,7 @@ Studies to understand how Prometheus works.
 
 ## About
 
-[Prometheus](https://prometheus.io/docs/introduction/overview/) is an open-source monitoring solution. It collects and stores the target applications' metrics as time series data, which can be retrieved with PromQL (Prometheus Query Language). It also handles alerts through [Alertmanager](https://prometheus.io/docs/introduction/glossary/#alertmanager).
+[Prometheus](https://prometheus.io/docs/introduction/overview/) is an open-source monitoring solution. It collects and stores the target applications' metrics, which can be retrieved with PromQL (Prometheus Query Language). Metrics are stored in [time series database (TSDB)](https://grafana.com/docs/grafana/latest/fundamentals/timeseries/)  as time series data. It also handles alerts through [Alertmanager](https://prometheus.io/docs/introduction/glossary/#alertmanager).
 
 ### Visualization
 
@@ -77,11 +77,16 @@ To clean up the workspace, run
 docker-compose down --volumes --rmi 'all'
 ```
 
-### Grafana
+### Following [Grafana](https://grafana.com/docs/grafana/latest/) tutorials
 
 To follow this section, change to the following directory
 ```sh
 cd grafana
+```
+
+To see Grafana sample configuration file, run
+```
+docker run --rm --entrypoint cat grafana/grafana:latest /etc/grafana/grafana.ini
 ```
 
 To start Prometheus and Grafana, run
@@ -90,12 +95,14 @@ docker-compose up
 ```
 Access [http://localhost:9090](http://localhost:9090) to see Prometheus and [http://localhost:3000](http://localhost:3000) to see Grafana. Run `CTRL+C` to stop it.
 
-Follow this [Grafana tutorial](https://prometheus.io/docs/tutorials/visualizing_metrics_using_grafana/).
+Follow this [Prometheus Grafana tutorial](https://prometheus.io/docs/tutorials/visualizing_metrics_using_grafana/), or this [Grafana Build your first dashboard](https://grafana.com/docs/grafana/latest/getting-started/build-first-dashboard/).
 
 To clean up the workspace, run
 ```
 docker-compose down --volumes --rmi 'all'
 ```
+
+TODO add provision example https://grafana.com/tutorials/provision-dashboards-and-data-sources/
 
 ### Creating an exporter
 
